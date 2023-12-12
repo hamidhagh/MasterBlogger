@@ -37,7 +37,7 @@ namespace MB.Infrastructure.Query
                     }).ToList();
         }
 
-        /*public ArticleQueryView GetArticle(long id)
+        public ArticleQueryView GetArticle(long id)
         {
             return _context.Articles.Include(x => x.ArticleCategory).Select(x => new ArticleQueryView
             {
@@ -48,12 +48,12 @@ namespace MB.Infrastructure.Query
                 ShortDescription = x.ShortDescription,
                 Image = x.Image,
                 Content = x.Content,
-                CommentsCount = x.Comments.Count(z => z.Status == Statuses.Confirmed),
-                Comments = MapComments(x.Comments.Where(z => z.Status == Statuses.Confirmed))
+                //CommentsCount = x.Comments.Count(z => z.Status == Statuses.Confirmed),
+                //Comments = MapComments(x.Comments.Where(z => z.Status == Statuses.Confirmed))
             }).FirstOrDefault(x => x.Id == id);
         }
 
-        private static List<CommentQueryView> MapComments(IEnumerable<Comment> comments)
+        /*private static List<CommentQueryView> MapComments(IEnumerable<Comment> comments)
         {
             return comments.Select(comment => new CommentQueryView
             {
