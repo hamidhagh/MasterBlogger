@@ -15,6 +15,9 @@ namespace MB.Domain.ArticleCategoryAgg
         public bool IsDeleted { get; private set; }
         public DateTime CreationDate { get; private set; }
         public ICollection<Article> Articles { get; set; }
+        protected ArticleCategory()
+        {
+        }
         public ArticleCategory(string title, IArticleCategoryValidatorService validatorService)
         {
             GuardAgainstEmptyTitle(title);
