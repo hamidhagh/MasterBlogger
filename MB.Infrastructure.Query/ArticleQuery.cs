@@ -1,4 +1,5 @@
-﻿using MB.Infrastructure.EFCore;
+﻿using MB.Domain.CommentAgg;
+using MB.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace MB.Infrastructure.Query
         public List<ArticleQueryView> GetArticles()
         {
             return _context.Articles
-                //.Include(x => x.Comments)
+                .Include(x => x.Comments)
                 .Include(x => x.ArticleCategory)
                 .Select(x =>
                     new ArticleQueryView
@@ -33,7 +34,7 @@ namespace MB.Infrastructure.Query
                         CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
                         ShortDescription = x.ShortDescription,
                         Image = x.Image,
-                        //CommentsCount = x.Comments.Count(z => z.Status == Statuses.Confirmed)
+                        CommentsCount = x.Comments.Count(z => z.Status == Statuses.Confirmed)
                     }).ToList();
         }
 
@@ -48,12 +49,12 @@ namespace MB.Infrastructure.Query
                 ShortDescription = x.ShortDescription,
                 Image = x.Image,
                 Content = x.Content,
-                //CommentsCount = x.Comments.Count(z => z.Status == Statuses.Confirmed),
-                //Comments = MapComments(x.Comments.Where(z => z.Status == Statuses.Confirmed))
+                CommentsCount = x.Comments.Count(z => z.Status == Statuses.Confirmed),
+                Comments = MapComments(x.Comments.Where(z => z.Status == Statuses.Confirmed))
             }).FirstOrDefault(x => x.Id == id);
         }
 
-        /*private static List<CommentQueryView> MapComments(IEnumerable<Comment> comments)
+        private static List<CommentQueryView> MapComments(IEnumerable<Comment> comments)
         {
             return comments.Select(comment => new CommentQueryView
             {
@@ -61,6 +62,6 @@ namespace MB.Infrastructure.Query
                 CreationDate = comment.CreationDate.ToString(CultureInfo.InvariantCulture),
                 Message = comment.Message
             }).ToList();
-        }*/
+        }
     }
 }
