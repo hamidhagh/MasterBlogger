@@ -38,6 +38,7 @@ namespace MB.Application
             _unitOfWork.BeginTran();
             var comment = _commentRepository.Get(id);
             comment.Confirm();
+            _unitOfWork.CommitTran();
         }
 
         public void Cancel(long id)
