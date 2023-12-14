@@ -1,4 +1,5 @@
-﻿using MB.Application.Contracts.Comment;
+﻿using _01_Framework.Infrastructure;
+using MB.Application.Contracts.Comment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace MB.Domain.CommentAgg
 {
-    public interface ICommentRepository
+    public interface ICommentRepository : IRepository<long, Comment>
     {
-        void CreateAndSave(Comment entity);
         List<CommentViewModel> GetList();
+
+        //before refactoring
+        /*void CreateAndSave(Comment entity);
         Comment Get(long id);
-        void Save();
+        void Save();*/
     }
 }

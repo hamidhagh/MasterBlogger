@@ -1,4 +1,5 @@
-﻿using MB.Domain.ArticleCategoryAgg;
+﻿using _01_Framework.Infrastructure;
+using MB.Domain.ArticleCategoryAgg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,16 @@ using System.Threading.Tasks;
 namespace MB.Infrastructure.EFCore.Repositories
 {
     
-    public class ArticleCategoryRepository : IArticleCategoryRepository
+    public class ArticleCategoryRepository : BaseRepository<long, ArticleCategory>, IArticleCategoryRepository
     {
         private readonly MasterBloggerContext _context;
-        public ArticleCategoryRepository(MasterBloggerContext context)
+        public ArticleCategoryRepository(MasterBloggerContext context) : base(context)
         {
             _context = context;
         }
-        public List<ArticleCategory> GetAll()
+
+        //before refactoring
+        /*public List<ArticleCategory> GetAll()
         {
             return _context.ArticleCategories.OrderByDescending(x => x.Id).ToList();
         }
@@ -38,6 +41,6 @@ namespace MB.Infrastructure.EFCore.Repositories
         public bool Exists(string title)
         {
             return _context.ArticleCategories.Any(x => x.Title == title);
-        }
+        }*/
     }
 }
