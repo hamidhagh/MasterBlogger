@@ -18,10 +18,15 @@ namespace MB.Domain.ArticleCategoryAgg.Services
 
         public void CheckThatThisRecordAlreadyExists(string title)
         {
+            throw new NotImplementedException();
+        }
+
+        /*public void CheckThatThisRecordAlreadyExists(string title)
+        {
             if (_articleCategoryRepository.Exists(x => x.Title == title))
             {
                 throw new DuplicatedRecordException("This record already exists in database");
             }
-        }
+        }*/
     }
 }
